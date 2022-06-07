@@ -13,7 +13,7 @@ enum Status{
 	Closed=3
 };
 
-typedef struct 
+typedef struct 		//The Structure Containing all The Account Data 
 {
 	u64 nationalID;
 	u32 accountID;
@@ -24,7 +24,6 @@ typedef struct
 	u8 age;
 	enum Status accountStatus;
 	u8 accountPassword[20];
-
 }user;
 
 typedef struct Node_type node;

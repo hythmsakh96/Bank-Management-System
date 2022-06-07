@@ -14,6 +14,9 @@
 
 extern node* head;
 
+#define		NOT_EXIST		0
+#define		EXIST			1
+
 u8 clientMode(node ** TempNode)
 {
 	u32 accountID;
@@ -23,27 +26,32 @@ u8 clientMode(node ** TempNode)
 	printf("/***************************************************************************************/\n");
 	printf("/**************************  IMT Bank System -- Client Mode ****************************/\n");
 	printf("Please Enter your Account ID:");
-	openExistingAccount(TempNode);
-	if (*TempNode != NULL)
+	openExistingAccount(TempNode);	//Search for The Account ID
+	if (*TempNode != NULL)		//If The Account ID is Found
 	{	
 		printf("\nPlease Enter your Password:");
 		scanf("%s",&password);
-		if(strcmp((*TempNode)->data.accountPassword,password))
+		if(strcmp((*TempNode)->data.accountPassword,password))	//IF The Password Entered is Wrong
 		{	
 			printf("Wrong Password");
+			printf("Press any key........");
 			getchar();
-			return 0;
+			getchar();
+			return NOT_EXIST;
 		}
 		else
 		{
 			displayData(*TempNode);
-			return 1;
+			return EXIST;
 		}
 	}
 	else
 	{
 		printf("There is no such account");
-		return 0;
+		printf("Press any key........");
+		getchar();
+		getchar();
+		return NOT_EXIST;
 	}
 } 
 void changeAccountPass(node* TempNode)
@@ -54,13 +62,15 @@ void changeAccountPass(node* TempNode)
 	if(strcmp(TempNode->data.accountPassword,password))
 	{	
 		printf("Wrong Password");
+		printf("Press any key........");
+		getchar();
 		getchar();
 	}
 	else
 	{
 		printf("Correct Password");
 		getchar();
-		printf("\nPlease Enter your Password:");
+		printf("\nPlease Enter your  New Password:");
 		scanf("%s",&password);
 		strcpy(TempNode->data.accountPassword,password);
 	}
